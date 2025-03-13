@@ -44,7 +44,7 @@ public class ClubDeportivo {
 	}
 
 	public void anyadirActividad(Grupo g) throws ClubException {
-		if (g==null){ // ADDME: anaydido para comprobar los grupos nulos
+		if (g==null){ // ADDME: anyadido para comprobar los grupos nulos
 			throw new ClubException("ERROR: el grupo es nulo");
 		}
 		int pos = buscar(g);
@@ -81,7 +81,7 @@ public class ClubDeportivo {
 					grupos[i].matricular(plazasGrupo);
 					npersonas -= plazasGrupo;
 				} else {
-					grupos[i].matricular(npersonas);
+					grupos[i].matricular(npersonas); //npersonas = 0?
 				}
 			}
 			i++;
