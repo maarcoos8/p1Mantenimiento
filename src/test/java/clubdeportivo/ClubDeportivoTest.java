@@ -55,7 +55,7 @@ public class ClubDeportivoTest {
 
         // Act & Assert
         assertThrows(ClubException.class, () -> club.anyadirActividad(nulo));
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> club.anyadirActividad(datos));
+        assertThrows(ClubException.class, () -> club.anyadirActividad(datos));
         assertThrows(ClubException.class, () -> club.anyadirActividad(datos2));
     }
     
@@ -175,6 +175,24 @@ public class ClubDeportivoTest {
         
         // Assert
         assertEquals(expectedString, actualString);
+    }
+
+    @Test
+    @DisplayName ("Comprobamos que no se pueda añadir más grupos de los que se pueden")
+    void anyadir_grupo_maximo() throws ClubException {
+        // Arrange
+        Grupo grupo3 = new Grupo("G3", "Tenis", 20, 10, 50.0);
+        Grupo grupo4 = new Grupo("G4", "Padel", 15, 5, 40.0);
+        Grupo grupo5 = new Grupo("G5", "Yoga", 30, 26, 50.0);
+        club.anyadirActividad(grupo1);
+        club.anyadirActividad(grupo2);
+        club.anyadirActividad(grupo3);
+        club.anyadirActividad(grupo4);
+        club.anyadirActividad(grupo5);
+        Grupo grupo6 = new Grupo("G6", "Musculación", 24, 15, 50.0);
+        
+        // Act & Assert
+        assertThrows(ClubException.class, () -> club.anyadirActividad(grupo6));
     }
     
 }

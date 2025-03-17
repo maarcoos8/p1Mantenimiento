@@ -8,7 +8,7 @@ public class GrupoTest {
 
     @BeforeEach
     void setup() throws ClubException {
-        grupo = new Grupo("123A", "Zumba", 20, 10, 50.0);
+        grupo = new Grupo("123A", "Spinning", 20, 10, 50.0);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class GrupoTest {
     @DisplayName("Comprueba que se imprime por pantalla correctamente")
     void grupo_toString() {
         // Arrange
-        String expectedString = "(123A - Zumba - 50.0 euros - P:20 - M:10)";
+        String expectedString = "(123A - Spinning - 50.0 euros - P:20 - M:10)";
         
         // Act
         String result = grupo.toString();
@@ -73,16 +73,144 @@ public class GrupoTest {
         // Assert
         assertEquals(expectedString, result);
     }
-    /* 
+
+    
     @Test
-    void testGrupoEquals() throws ClubException {
+    @DisplayName("Equals devuelve true con dos grupos iguales")
+    public void equals_DosGruposIguales_DevuelveTrue() throws ClubException {
         // Arrange
-        Grupo grupoIgual = new Grupo("G1", "Futbol", 30, 15, 60.0);
-        Grupo grupoDiferente = new Grupo("G2", "Baloncesto", 25, 5, 40.0);
-        
-        // Act & Assert
-        assertTrue(grupo.equals(grupoIgual)); // Deben ser considerados iguales por código y actividad
-        assertFalse(grupo.equals(grupoDiferente)); // No deben ser iguales
+        Grupo grupoIgual = new Grupo("123A", "Spinning", 20, 10, 50.0);
+
+        // Act
+        boolean iguales = grupo.equals(grupoIgual);
+
+        // Assert
+        assertTrue(iguales);
     }
-    */
+
+    @Test
+    @DisplayName("equals devuelve false con un objeto que no es un Grupo")
+    public void equals_ObjetoNoGrupo_DevuelveFalse() throws ClubException {
+        // Arrange
+        Object objeto = new Object();
+
+        // Act
+        boolean iguales = grupo.equals(objeto);
+
+        // Assert
+        assertFalse(iguales);
+    }
+
+    @Test
+    @DisplayName("equals devuelve false entre dos grupos con códigos diferentes")
+    public void equals_DosGruposConCodigosDiferentes_DevuelveFalse() throws ClubException {
+        // Arrange
+        Grupo grupo2 = new Grupo("123A", "Zumba", 15, 10, 25.45);
+
+        // Act
+        boolean iguales = grupo.equals(grupo2);
+
+        // Assert
+        assertFalse(iguales);
+    }
+
+    @Test
+    @DisplayName("equals devuelve false entre dos grupos con actividades diferentes")
+    public void equals_DosGruposConActividadesDiferentes_DevuelveFalse() throws ClubException {
+        // Arrange
+        Grupo grupo2 = new Grupo("123A", "Zumba", 15, 10, 25.45);
+
+        // Act
+        boolean iguales = grupo.equals(grupo2);
+
+        // Assert
+        assertFalse(iguales);
+    }
+
+
+
+    @Test
+    @DisplayName("hashCode devuelve el código hash del grupo correctamente")
+    public void hashCode_InvocarMetodo_DevuelveCodigoHashCorrectamente() throws ClubException {
+
+        // Act
+        int codigoHash = grupo.hashCode();
+        int codigoHashEsperado = "123A".toUpperCase().hashCode() + "Spinning".toUpperCase().hashCode();
+
+        // Assert
+        assertEquals(codigoHashEsperado, codigoHash);
+    }
+
+    /*
+     * PRUEBAS DE LOS GETTERS
+     * grupo = new Grupo("123A", "Spinnig", 20, 10, 50.0);
+     */
+
+    @Test
+    @DisplayName("getCodigo devuelve el código correctamente")
+    public void getCodigo_prueba() throws ClubException {
+        // Arrange
+        String codigoEsperado = "123A";
+
+        // Act
+        String codigoObtenido = grupo.getCodigo();
+
+        // Assert
+        assertEquals(codigoEsperado, codigoObtenido);
+    }
+
+    @Test
+    @DisplayName("getActividad devuelve la actividad correctamente")
+    public void getActividad_prueba() throws ClubException {
+        // Arrange
+        String actividadEsperada = "Spinning";
+
+        // Act
+        String actividadObtenida = grupo.getActividad();
+
+        // Assert
+        assertEquals(actividadEsperada, actividadObtenida);
+    }
+
+    @Test
+    @DisplayName("getPlazas devuelve el número de plazas correctamente")
+    public void getPlazas_prueba() throws ClubException {
+        // Arrange
+        int plazasEsperadas = 20;
+
+        // Act
+        int plazasObtenidas = grupo.getPlazas();
+
+        // Assert
+        assertEquals(plazasEsperadas, plazasObtenidas);
+    }
+
+    @Test
+    @DisplayName("getMatriculados devuelve el número de matriculados correctamente")
+    public void getMatriculados_prueba() throws ClubException {
+        // Arrange
+        int matriculadosEsperados = 10;
+
+        // Act
+        int matriculadosObtenidos = grupo.getMatriculados();
+
+        // Assert
+        assertEquals(matriculadosEsperados, matriculadosObtenidos);
+    }
+
+    @Test
+    @DisplayName("getTarifa devuelve la tarifa correctamente")
+    public void getTarifa_prueba() throws ClubException {
+        // Arrange
+        double tarifaEsperada = 50.0;
+
+        // Act
+        double tarifaObtenida = grupo.getTarifa();
+
+        // Assert
+        assertEquals(tarifaEsperada, tarifaObtenida);
+    }
+
 }
+
+
