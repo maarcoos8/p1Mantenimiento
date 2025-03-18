@@ -111,7 +111,7 @@ public class ClubDeportivoAltoRendimientoTest {
 
     @Test
     @DisplayName("Error de formato de número incorrecto al añadir actividad")
-    void testAnyadirActividadFormatoNumeroIncorrecto() {
+    void anyadir_actividad_formato_incorrecto() {
         // Arrange
         String[] datosInvalidos = {"G5", "Boxeo", "v", "5", "30.0"}; // "v" no es un número válido
         

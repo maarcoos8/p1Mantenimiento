@@ -83,7 +83,7 @@ public class ClubDeportivo {
 		if (plazas < npersonas) {
 			throw new ClubException("ERROR: no hay suficientes plazas libres para esa actividad en el club.");
 		}
-		// Añadimos esto al cóigo para que no se puedan matricular con npersonas inferiores a 0
+		// Añadimos esto al código para que no se puedan matricular con npersonas inferiores a 0
 		if (npersonas < 0) {
 			throw new ClubException("ERROR: el número de personas a matricular debe ser mayor que 0.");
 		}
@@ -95,7 +95,7 @@ public class ClubDeportivo {
 					grupos[i].matricular(plazasGrupo);
 					npersonas -= plazasGrupo;
 				} else {
-					grupos[i].matricular(npersonas); //npersonas = 0?
+					grupos[i].matricular(npersonas);
 				}
 			}
 			i++;

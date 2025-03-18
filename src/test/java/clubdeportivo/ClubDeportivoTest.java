@@ -75,24 +75,6 @@ public class ClubDeportivoTest {
     }
 
     @Test
-    @DisplayName("Comprueba que las personas se puedan matricular en una actividad de manera exitosa y que el numero de las plazas disponibles disminuya")
-    void matricular_exito2() throws ClubException {
-        // Arrange
-        club.anyadirActividad(grupo1);
-        club.anyadirActividad(grupo2);
-        Grupo grupoFutbol2 = new Grupo("G1", "Futbol", 25, 10, 50.0);
-        club.anyadirActividad(grupoFutbol2);
-        int plazasAntes = club.plazasLibres("Futbol");
-        int matricular = 15;
-        
-        // Act
-        club.matricular("Futbol", matricular);
-        
-        // Assert
-        assertEquals(plazasAntes - matricular, club.plazasLibres("Futbol"));
-    }
-
-    @Test
     @DisplayName ("Verifica que no se puedan matricular más personas de las plazas que hay disponibles")
     void matricular_sin_plazas() throws ClubException {
         // Arrange
@@ -102,6 +84,7 @@ public class ClubDeportivoTest {
         // Act & Assert
         assertThrows(ClubException.class, () -> club.matricular("Futbol", personasMatricular));
     }
+
     @Test
     @DisplayName ("Calcula los ingresos del club sumando la tarifa de todos los grupos matriuclados y que el resultado sea el esperado")
     void ingresos() throws ClubException {
@@ -177,6 +160,7 @@ public class ClubDeportivoTest {
         assertEquals(expectedString, actualString);
     }
 
+    
     @Test
     @DisplayName ("Comprobamos que no se pueda añadir más grupos de los que se pueden")
     void anyadir_grupo_maximo() throws ClubException {
@@ -195,4 +179,52 @@ public class ClubDeportivoTest {
         assertThrows(ClubException.class, () -> club.anyadirActividad(grupo6));
     }
     
+
+
+    @Test
+    @DisplayName("No se puede matricular un número negativo de personas")
+    void matricular_num_negativo() {
+        // Arrange
+        int personasMatricular = -5;
+        
+        // Act & Assert
+        assertThrows(ClubException.class, () -> club.matricular("Futbol", personasMatricular));
+    }
+
+    
+    @Test
+    @DisplayName("No se puede matricular en una actividad inexistente")
+    void matricular_actividad_inexistente() {
+        // Arrange
+        int personasMatricular = 5;
+        
+        // Act & Assert
+        assertThrows(ClubException.class, () -> club.matricular("Natacion", personasMatricular));
+    }
+
+
+    @Test
+    @DisplayName("Comprueba que se pueda matricular en dos grupos diferentes si es necesario")
+    public void matricula_en_grupos_diferentes() throws ClubException{
+        // Arrange
+        Grupo grupo3 = new Grupo("G3", "Futbol", 15, 10, 50.0);
+        club.anyadirActividad(grupo1);
+        club.anyadirActividad(grupo3);
+
+        // Act
+        club.matricular("Futbol", 12);
+
+        // Assert
+        assertEquals(3, club.plazasLibres("Futbol"));
+    }
+    
+    @Test
+    @DisplayName("Comprueba que matricular en una actividad cuyo nombre está vacío lanza una excepción")
+    void matricular_actividad_vacia() {
+        // Arrange
+        int personasMatricular = 5;
+        
+        // Act & Assert
+        assertThrows(ClubException.class, () -> club.matricular("", personasMatricular));
+    }
 }

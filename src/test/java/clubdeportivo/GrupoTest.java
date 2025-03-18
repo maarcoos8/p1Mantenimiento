@@ -77,7 +77,7 @@ public class GrupoTest {
     
     @Test
     @DisplayName("Equals devuelve true con dos grupos iguales")
-    public void equals_DosGruposIguales_DevuelveTrue() throws ClubException {
+    public void equals_grupos_iguales() throws ClubException {
         // Arrange
         Grupo grupoIgual = new Grupo("123A", "Spinning", 20, 10, 50.0);
 
@@ -90,7 +90,7 @@ public class GrupoTest {
 
     @Test
     @DisplayName("equals devuelve false con un objeto que no es un Grupo")
-    public void equals_ObjetoNoGrupo_DevuelveFalse() throws ClubException {
+    public void equals_no_grupo() throws ClubException {
         // Arrange
         Object objeto = new Object();
 
@@ -103,7 +103,7 @@ public class GrupoTest {
 
     @Test
     @DisplayName("equals devuelve false entre dos grupos con códigos diferentes")
-    public void equals_DosGruposConCodigosDiferentes_DevuelveFalse() throws ClubException {
+    public void equals_grupos_diferente_codigo() throws ClubException {
         // Arrange
         Grupo grupo2 = new Grupo("123A", "Zumba", 15, 10, 25.45);
 
@@ -116,7 +116,7 @@ public class GrupoTest {
 
     @Test
     @DisplayName("equals devuelve false entre dos grupos con actividades diferentes")
-    public void equals_DosGruposConActividadesDiferentes_DevuelveFalse() throws ClubException {
+    public void equals_grupos_diferente_actividad() throws ClubException {
         // Arrange
         Grupo grupo2 = new Grupo("123A", "Zumba", 15, 10, 25.45);
 
@@ -131,7 +131,7 @@ public class GrupoTest {
 
     @Test
     @DisplayName("hashCode devuelve el código hash del grupo correctamente")
-    public void hashCode_InvocarMetodo_DevuelveCodigoHashCorrectamente() throws ClubException {
+    public void hashCode_correcto() throws ClubException {
 
         // Act
         int codigoHash = grupo.hashCode();
